@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/playlist.css">
+    <link rel="stylesheet" href="styles/add.css">
+    <link rel="stylesheet" href="styles/player.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/notifications.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <meta name="author" content="devHq">
+    <title>music_player_app</title>
+</head>
+<body>
+    <audio id="music_player" src=""></audio>
+    <div id="container">
+        <nav class="head">
+            <div class="searchbar">
+                <input type="text">
+            </div>
+            <div class="container">
+                <div class="logo">muse</div>
+                <div class="search_profile">
+                    <button class="search padded_icon">
+                        <img src="assets/svgs/search_bold.svg" alt="">
+                    </button>
+                    <button class="profile">H</button>
+                </div>
+            </div>
+        </nav>
+        <section id="app">
+            
+            <aside id="aside1"></aside>
+            <main>
+                <section class="page selected_page" id="home">
+                    <div id="greeting">
+                        <h3>Hello Haqiim,</h3>
+                        <h1 class="greeting">Welcome back</h1>
+                    </div>
+                    <div class="sliders">
+                        <div class="slide_head">
+                            <h2>Albums</h2>
+                            <div class="slider" id="slider1">
+                                <div class="slides">
+                                    <div class="slide">
+                                        <div class="slide_img">
+                                            <img src="assets/pictures/under_the_streetlight.jpeg" alt="">
+                                        </div>
+                                        <div class="slide_name">under the streetlight</div>
+                                    </div>
+                                    <div class="slide">
+                                        <div class="slide_img">
+                                            <img src="assets/pictures/cooleyhighharmony.jpeg" alt="">
+                                        </div>
+                                        <div class="slide_name">cooleyhighharmony</div>
+                                    </div>
+                                    <div class="slide">
+                                        <div class="slide_img">
+                                            <img src="assets/pictures/bad.jpeg" alt="">
+                                        </div>
+                                        <div class="slide_name">bad</div>
+                                    </div>
+                                    <div class="slide">
+                                        <div class="slide_img">
+                                            <img src="assets/pictures/tbh.jpeg" alt="">
+                                        </div>
+                                        <div class="slide_name">tbh</div>
+                                    </div>
+                                    <div class="slide">
+                                        <div class="slide_img">
+                                            <img src="assets/pictures/westlife.jpg" alt="">
+                                        </div>
+                                        <div class="slide_name">tbh</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide_head">
+                            <h2>Singers</h2>
+                            <div class="slider" id="slider2">
+                                <div class="slides">
+                                    <div class="slide">
+                                        <div class="slide_img">
+                                            <img src="assets/pictures/edsheeran.jpeg" alt="">
+                                        </div>
+                                        <div class="slide_name">Ed sheeran</div>
+                                    </div>
+                                    <div class="slide">
+                                        <div class="slide_img">
+                                            <img src="assets/pictures/simi.jpeg" alt="">
+                                        </div>
+                                        <div class="slide_name">Simi</div>
+                                    </div>
+                                    <div class="slide">
+                                        <div class="slide_img">
+                                            <img src="assets/pictures/burnaboy.jpeg" alt="">
+                                        </div>
+                                        <div class="slide_name">Burnaboy</div>
+                                    </div>
+                                    <div class="slide">
+                                        <div class="slide_img">
+                                            <img src="assets/pictures/fireboy.jpg" alt="">
+                                        </div>
+                                        <div class="slide_name">Fireboy</div>
+                                    </div>
+                                    <div class="slide">
+                                        <div class="slide_img">
+                                            <img src="assets/pictures/timi_dakolo.jpg" alt="">
+                                        </div>
+                                        <div class="slide_name">Timi Dakolo</div>
+                                    </div>
+                                    <div class="slide">
+                                        <div class="slide_img">
+                                            <img src="assets/pictures/mustafa.jpeg" alt="">
+                                        </div>
+                                        <div class="slide_name">Mustafa</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="page" id="playlist">
+                   <h1 class="title">Library</h1>
+                   <div class="page_content" id="playlist_page">
+                        <div class="list_slider" id="library-slide"></div>
+                   </div>
+                </section>
+                <section class="page" id="add">
+                    <h1 class="title">Add songs</h1>
+                   <div class="page_content">
+                        <div class="list_slider">
+                            <form action="">
+                                <div>
+                                    <label for="song">song:</label>
+                                    <input type="text" name="song">
+                                </div>
+                                <div>
+                                    <label for="author">author:</label>
+                                    <input type="text" name="author">
+                                </div>
+                                <div>
+                                    <label for="author">album:</label>
+                                    <input type="text" name="album">
+                                </div>
+                                <div>
+                                    <input type="file" id='fileadd' accept="mp3">
+                                    <div id="myfile">
+                                        <button type="button" id="filebtn">choose file</button>
+                                        <input type="text" id="reveal">
+                                    </div>
+                                </div>
+                                <button id="ads song" type="submit"></button>
+                            </form>
+                        </div>
+                   </div>
+                </section>
+                <section class="page" id="notification">
+                    <h1 class="title">Notifications</h1>
+                   <div id="notes" class="page_content">
+                    <div class="list_slider" id="notes-slider"></div>
+                   </div>
+                </section>
+                <section class="page" id="settings">
+                    <h1 class="title">Settings</h1>
+                   <div class="page_content">
+                    
+                   </div>
+                </section>
+                <section class="page" id="player">
+                    <div class="page_content">
+                        <div id="box-like">
+                            <div class="like">
+                                <button id="likebutton">
+                                    <img src="assets/svgs/heart.svg" alt="">
+                                </button>
+                            </div>
+                            <div class="play_box"></div>
+                        </div>
+                        <div id="controller">
+                            <div class="play_range">
+                                <div id="start"></div>
+                                <input id="play_range" type="range" value='0' step="0.01">
+                                <div id="stop"></div>
+                            </div>
+                            <div class="song_author">
+                                <div class="playeritem song"></div>
+                                <div class="playeritem author"></div>
+                            </div>
+                            <div class="controls">
+                                <button class="control_item" id="repeat">
+                                    <div class="element">1</div>
+                                    <img src="assets/svgs/repeat-square.svg" alt="">
+                                </button>
+                                <button class="control_item" id="previous">
+                                    <img src="assets/svgs/previous.svg" alt="">
+                                </button>
+                                <button class="control_item" id="play">
+                                    <img src="assets/svgs/play.svg" alt="">
+                                </button>
+                                <button class="control_item" id="next">
+                                    <img src="assets/svgs/next.svg" alt="">
+                                </button>
+                                <button class="control_item" id="shuffle">
+                                    <div class="element" id="elem2"></div>
+                                    <img src="assets/svgs/shuffle.svg" alt="">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+            <aside id="aside2">
+                <div id="playlist2">
+                    <div class="title">Playlist</div>
+                    <div id="list2"> </div>
+                </div>
+                <div id="player2"></div>
+            </aside>
+    
+    
+    
+        </section>
+        <div id="navigation">
+            <div class="container">
+                <div class="playing nav_item" id="playerbtn">
+                    <div class="disk_song">
+                        <div class="disk">
+                            <img src="assets/pictures/disk.png" alt="">
+                        </div>
+                        <div class="playing_song">
+                            <div class="song"></div>
+                            <div class="author"></div>
+                        </div>
+                    </div>
+                </div>
+                <nav class="foot">
+                    <div class="nav_item selected_nav" id="homebtn">
+                        <button class="item_img padded_icon">
+                            <img src="assets/svgs/home_bold2.svg" alt="">
+                        </button>
+                        <div class="item_name">Home</div>
+                    </div>
+                    <div class="nav_item" id="playlistbtn">
+                        <button class="item_img padded_icon">
+                            <img src="assets/svgs/playlist_bold2.svg" alt="">
+                        </button>
+                        <div class="item_name">Library</div>
+                    </div>
+                    <div class="nav_item" id="addbtn">
+                        <button class="item_img padded_icon">
+                            <img src="assets/svgs/add_bold2.svg" alt="">
+                        </button>
+                        <div class="item_name">Add song</div>
+                    </div>
+                    <div class="nav_item" id="notificationbtn">
+                        <button class="item_img padded_icon">
+                            <img src="assets/svgs/notification_bold2.svg" alt="">
+                            <div class="elem"></div>
+                        </button>
+                        <div class="item_name">Notifications</div>
+                    </div>
+                    <div class="nav_item" id="settingsbtn">
+                        <button class="item_img padded_icon">
+                            <img src="assets/svgs/setting_bold2.svg" alt="">
+                        </button>
+                        <div class="item_name">Settings</div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/script.js" type="module"></script>
+    <script src="scripts/player.js" type="module"></script>
+</body>
+</html>
