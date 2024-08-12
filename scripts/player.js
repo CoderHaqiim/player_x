@@ -158,12 +158,12 @@ play_range.addEventListener('change',()=>{
 
 })
 
-play_range.addEventListener('touchstart',()=>{
-    exitTimeUpdateListener()
-    play_range.addEventListener('touchmove',()=>{
-        mp.currentTime = play_range.value
-    })
-})
+// play_range.addEventListener('touchstart',()=>{
+//     exitTimeUpdateListener()
+//     play_range.addEventListener('touchmove',()=>{
+//         mp.currentTime = play_range.value
+//     })
+// })
 
 function exitTimeUpdateListener(){
     mp.removeEventListener('timeupdate',setTimer)

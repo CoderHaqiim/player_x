@@ -19,6 +19,7 @@ const player = document.querySelector("#player")
 const player2 = document.querySelector("#player2")
 const aside1 = document.querySelector("#aside1")
 const slides = document.querySelectorAll("slides")
+const loader = document.querySelector("#loader")
 searchbar.open = false
 elem.innerText = `${notifications.length}`
 
@@ -29,12 +30,18 @@ onload = () => {
         player2.append(player)
         player.style.display = 'flex'
     }
+    loader.style.display = "none"
 }
 
 
 onresize = () =>{ 
-    if(window.innerWidth = 1000){
+    if(innerWidth < 1000){
+        return
+    }
+    else if(innerWidth = 1000){
         window.location.reload()
+    }else{
+        return
     }
 }
 
