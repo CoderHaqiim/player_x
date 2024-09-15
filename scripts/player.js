@@ -1,4 +1,5 @@
 import Songs from './db.js'
+import { itemsArray } from './script.js'
 
 const element = document.querySelector('.element')
 const shuffle_btn = document.querySelector('#shuffle')
@@ -8,13 +9,16 @@ const elem2 = document.querySelector('#elem2')
 const mp = document.querySelector('#music_player')
 const start = document.querySelector("#start")
 const stop = document.querySelector('#stop')
+const playBtns = document.querySelectorAll(".play_btns")
 const play_range = document.querySelector('#play_range')
 let play_btn = document.querySelector('#play')
 let next_btn = document.querySelector('#next')
 let previous_btn = document.querySelector('#previous')
 let repeat_btn = document.querySelector('#repeat')
 const disk = document.querySelector(".disk")
+const shuffleIcon = document.querySelector("#shuffleIcon")
 let playing_id=  Songs[0].id;
+const list = document.querySelector("#list2")
 start.innerText = stop.innerText = '00:00'
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -29,11 +33,11 @@ const music_player = {
     play: function(){  
         exitTimeUpdateListener()
         mp.play() 
-        play_btn.children[0].src = `assets/svgs/pause.svg`
         disk.classList.add('spin')
         play_range.max = mp.duration
         stop.innerText = parseAndDisplayTime('duration')
         mp.addEventListener('timeupdate',setTimer)
+        stylePlayingItem()
     },
 
     pause:function(){
@@ -45,10 +49,12 @@ const music_player = {
 
     next: function(){
         this.switchSong(playing_id++,'next')
+        itemsArray[playing_id + 7].style.border = "1px solid var(--accent)"
     },
 
     previous:function(){
         this.switchSong(playing_id--,'previous')
+        list.scrollBy({top:-56, left:0, behavior:"smooth"})
     },
 
     changeSongDetails:function(){
@@ -68,7 +74,12 @@ const music_player = {
 
     setMode:function(clicked){
        this.mode = this.modes[clicked]
-       clicked === 1? (element.style.display = 'flex') : (element.style.display = 'none')
+       switch(clicked){
+        case 0: {element.style.display = 'none'; shuffleIcon.classList.remove('shuffleIcon')};break;
+        case 2: {shuffleIcon.classList.add('shuffleIcon'); element.style.display = 'none'};break;
+        case 1 : {element.style.display = 'flex'; shuffleIcon.classList.remove('shuffleIcon')}; break;
+        default: {element.style.display = 'none'; shuffleIcon.classList.remove('shuffleIcon')}
+       }
     },
 
     useMode:function(){
@@ -99,17 +110,22 @@ const music_player = {
             playing_id = randomID
         }else{
             if(order === 'next'){
-                if(playing_id < Songs.length - 1){
+                if(playing_id < Songs.length){
+                    list.scrollBy({top:56, left:0, behavior:"smooth"})
                     action
+                }else{
+                    playing_id = 0
+                    list.scrollBy({top:-56 * 7, left:0, behavior:"smooth"})
+                }
+            }else if(order === 'previous'){
+                if(playing_id > 0){
+                    action
+                    list.scrollBy({top:-56, left:0, behavior:"smooth"})
                 }else{
                     playing_id = 0
                 }
             }else{
-                if(playing_id > 0){
-                    action
-                }else{
-                    playing_id = 0
-                }
+                action
             }
         }
         this.changeSongDetails()
@@ -178,24 +194,35 @@ play_range.addEventListener('touchend',()=>{
 })
 
 // start and pause songs
-play_btn.onclick=()=>{
-    if(!mp.playing){
-        music_player.play()
-        mp.playing = true
-    }else{
-        music_player.pause()
-        mp.playing = false
+playBtns.forEach((btn, index)=>{
+    btn.onclick=(event)=>{
+        event.stopPropagation()
+        if(!mp.playing){
+            music_player.play()
+            mp.playing = true
+            playBtns.forEach(item =>{
+                item.children[0].src = `assets/svgs/pause.svg`
+            })
+        }else{
+            music_player.pause()
+            mp.playing = false
+            playBtns.forEach(item =>{
+                item.children[0].src = `assets/svgs/play.svg`
+            })
+        }
     }
-}
+})
 
 
 //change to the next song
 next_btn.onclick=()=>{
     music_player.next()
+    stylePlayingItem()
 }
 
 previous_btn.onclick=()=>{
     music_player.previous()
+    stylePlayingItem()
 }
 
 shuffle_btn.onclick = () =>{
@@ -210,13 +237,37 @@ function modetoggle(){
         music_player.setMode(clicked)
     }
 }
+
+function manualSelect(){
+    itemsArray.forEach((item, index)=>{
+        if(index >= 7){
+            item.onclick = () =>{
+                itemsArray.forEach(it => it.style.border = "1px solid transparent")
+                playing_id = index - 7
+                // music_player.setSong()
+                // music_player.changeSongDetails()
+                // mp.playing? music_player.play() : music_player.pause()
+                music_player.switchSong(playing_id, null)
+                item.style.border = "1px solid var(--accent)"
+            }
+        }
+    })
+}
+
+function stylePlayingItem(){
+    itemsArray.forEach(item =>{
+        item.style.border = "1px solid transparent"
+    })
+    itemsArray[playing_id + 7].style.border = "1px solid var(--accent)"
+}
+
 let countMode = modetoggle()
 repeat_btn.onclick=()=>{
     countMode()
 }
 
 
-
+manualSelect()
 music_player.changeSongDetails()
 music_player.setSong()
 music_player.setMode(0)

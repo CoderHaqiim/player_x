@@ -1,3 +1,4 @@
+// "use strict"
 import Songs from './db.js'
 import {notifications} from './db.js'
 
@@ -7,8 +8,10 @@ const library_slider = document.querySelector('#library-slide')
 const notes_slider = document.querySelector('#notes-slider')
 const search_btn = document.querySelector('.search')
 const searchbar = document.querySelector('.searchbar')
+const search2 = document.querySelector("#search2")
 const playing = document.querySelector('.playing')
 const navigation = document.querySelector('#navigation')
+const desktopSearch = document.querySelector(".desktop_search")
 const list2 = document.querySelector("#list2")
 const navigation_height = navigation.clientHeight
 const fileadd = document.querySelector('#fileadd')
@@ -18,10 +21,15 @@ const elem = document.querySelector('.elem')
 const player = document.querySelector("#player")
 const player2 = document.querySelector("#player2")
 const aside1 = document.querySelector("#aside1")
-const slides = document.querySelectorAll("slides")
+const slides = document.querySelectorAll(".slides")
+const sliderBtns = document.querySelectorAll(".scrollLeftBtn")
 const loader = document.querySelector("#loader")
 searchbar.open = false
 elem.innerText = `${notifications.length}`
+const [slide1, slide2] = slides
+const [slideBtn1, slideBtn2] = sliderBtns
+export const itemsArray = []
+let screenWidth = innerWidth
 
 onload = () => {
     nav_items[1].click()
@@ -33,23 +41,28 @@ onload = () => {
     loader.style.display = "none"
 }
 
+function slideLeft () {
+    sliderBtns.forEach((btn, index)=>{
+        btn.onclick = () =>{
+            console.log(index)
+            slides[index].scrollBy({top:0, left:120, behavior:"smooth"})
+        }
+    })
+}
 
 onresize = () =>{ 
-    if(innerWidth < 1000){
-        return
-    }
-    else if(innerWidth = 1000){
+    if(innerWidth != screenWidth){
         window.location.reload()
-    }else{
-        return
     }
 }
 
-for(let i = 0; i < notifications.length; i++){
-   let notification = document.createElement('div')
-    notification.innerText = notifications[i].message
-    notification.classList.add('note')
-    notes_slider.appendChild(notification)
+function mapItemsToNotification(){
+    for(let i = 0; i < notifications.length; i++){
+        let notification = document.createElement('div')
+         notification.innerText = notifications[i].message
+         notification.classList.add('note')
+         notes_slider.appendChild(notification)
+     }
 }
 
 filebtn.onclick = () =>{
@@ -71,6 +84,8 @@ function createListFromSongs(parentItem){
         item.appendChild(song)
         item.appendChild(author)
         parentItem.append(item)
+
+        itemsArray.push(item)
     })
 }
 
@@ -113,20 +128,30 @@ nav_items.forEach(element =>{
     }
 })
 
-//logic to change color of icons
-
 //Controlling the searchbar
 search_btn.onclick = () =>{
   if(!searchbar.open){
-    searchbar.style.animationName = 'slidedown'
-    searchbar.style.display = 'flex'
-    searchbar.open = true
+    if(innerWidth < 1000){
+        searchbar.style.animationName = 'slidedown'
+        searchbar.style.display = 'flex'
+        searchbar.open = true
+    }else{
+       desktopSearch.style.border="1px solid var(--accent)"
+       search2.style.width = "400px"
+       search2.focus()
+    }
   }else{
     searchbar.style.animationName = 'slideup'
-    // searchbar.style.display = 'none'
     searchbar.open = false
   }
 }
 
+search2.onblur = () =>{
+    search2.style.width ="0px"
+     desktopSearch.style.border="1px solid transparent"
+}
+
 createListFromSongs(library_slider)
 createListFromSongs(list2)
+mapItemsToNotification()
+slideLeft()

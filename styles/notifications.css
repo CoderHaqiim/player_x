@@ -1,26 +1,8 @@
-:root{
-    --x-small:0.7rem;
-    --small:0.8rem;
-    --size_one:1rem;
-    --size_two:1.3rem;
-    --size_three:1.8rem;
-    --size_four:2rem;
-    --round: 50%;
-    --rounded1:5px;
-    --rounded2:10px;
-    --rounded3:15px;
-    --rounded4:20px;
-    --background:#0a0d0a;
-    --accent:#2ef45c;
-    --text:#ffffffcb;
-    --glass:#ffffff36;
-    --glass2:#ffffff1e;
-    --notes:'';
-}
+
 .note{
     width:100%;
     height:auto;
-    color:var(--text);
+    color:var(--text2);
     padding:5px;
     border-bottom:1px solid var(--glass);
     margin-bottom:10px;

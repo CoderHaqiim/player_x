@@ -9,8 +9,11 @@
     <link rel="stylesheet" href="styles/notifications.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
     <meta name="author" content="devHq">
     <title>music_player_app</title>
 </head>
@@ -31,9 +34,12 @@
             <div class="container">
                 <div class="logo">muse</div>
                 <div class="search_profile">
-                    <button class="search padded_icon">
-                        <img src="assets/svgs/search_bold.svg" alt="">
-                    </button>
+                    <div class="desktop_search">
+                        <input type="text" id="search2">
+                        <button class="search padded_icon">
+                            <img src="assets/svgs/search_bold.svg" alt="">
+                        </button>
+                    </div>
                     <button class="profile">H</button>
                 </div>
             </div>
@@ -51,6 +57,10 @@
                         <div class="slide_head">
                             <h2>Albums</h2>
                             <div class="slider" id="slider1">
+                                <div class="blur"></div>
+                                <div class="scrollLeftBtn">
+                                    <img src="assets/svgs/arrow-right.svg" alt="">
+                                </div>
                                 <div class="slides">
                                     <div class="slide">
                                         <div class="slide_img">
@@ -88,6 +98,10 @@
                         <div class="slide_head">
                             <h2>Singers</h2>
                             <div class="slider" id="slider2">
+                                <div class="blur"></div>
+                                <div class="scrollLeftBtn">
+                                    <img src="assets/svgs/arrow-right.svg" alt="">
+                                </div>
                                 <div class="slides">
                                     <div class="slide">
                                         <div class="slide_img">
@@ -200,12 +214,12 @@
                             <div class="controls">
                                 <button class="control_item" id="repeat">
                                     <div class="element">1</div>
-                                    <img src="assets/svgs/repeat-square.svg" alt="">
+                                    <img id="shuffleIcon" src="assets/svgs/repeat-square2.svg" alt="">
                                 </button>
                                 <button class="control_item" id="previous">
                                     <img src="assets/svgs/previous.svg" alt="">
                                 </button>
-                                <button class="control_item" id="play">
+                                <button class="control_item play_btns" id="play">
                                     <img src="assets/svgs/play.svg" alt="">
                                 </button>
                                 <button class="control_item" id="next">
@@ -243,6 +257,9 @@
                             <div class="author"></div>
                         </div>
                     </div>
+                    <button class="play_btns play2">
+                        <img src="assets/svgs/play.svg" alt="">
+                    </button>
                 </div>
                 <nav class="foot">
                     <div class="nav_item selected_nav" id="homebtn">
